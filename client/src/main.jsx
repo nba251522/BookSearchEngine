@@ -1,10 +1,21 @@
-import ReactDOM from 'react-dom/client'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import 'bootstrap/dist/css/bootstrap.min.css'
+import ReactDOM from 'react-dom/client';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-import App from './App.jsx'
-import SearchBooks from './pages/SearchBooks'
-import SavedBooks from './pages/SavedBooks'
+import App from './App.jsx';
+import SearchBooks from './pages/SearchBooks';
+import SavedBooks from './pages/SavedBooks';
+
+// Initialize Apollo Client
+const httpLink = createHttpLink({
+  uri: '/graphql', 
+});
+
+const client = new ApolloClient({
+  link: httpLink,
+  cache: new InMemoryCache(),
+});
 
 const router = createBrowserRouter([
   {
@@ -15,14 +26,18 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <SearchBooks />
-      }, {
+      }, 
+      {
         path: '/saved',
         element: <SavedBooks />
       }
     ]
   }
-])
+]);
 
+// Render the application
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <RouterProvider router={router} />
-)
+  <ApolloProvider client={client}>
+    <RouterProvider router={router} />
+  </ApolloProvider>
+);
