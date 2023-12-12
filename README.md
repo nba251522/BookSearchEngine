@@ -29,7 +29,7 @@ This Book Search Engine is a full-stack application showcasing my skills in buil
 
 To install this project:
 
-1. Clone the repository: `git clone git@github.com:nba251522/book-search-engine.git`
+1. Clone the repository: `git clone git@github.com:nba251522/BookSearchEngine.git`
 2. Navigate to the project directory.
 3. Run `npm install` at the root directory to install dependencies for the server.
 4. Navigate to the client directory and run `npm install` to install dependencies for the client.
